@@ -34,7 +34,11 @@ router.post("/", asyncHandler(async (req, res) => {
     const { gender, interests } = req.body;
     console.log(`gender: ${gender}`);
     console.table(interests);
-
+    const updatedUser =  await UserModel.findOneAndUpdate({discord: req.user.id}, {
+        gender,
+        interests
+    });
+    return res.status(200).json({ status: "ok", data: updatedUser})
 }))
 
 module.exports = router;
