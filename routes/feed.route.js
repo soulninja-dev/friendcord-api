@@ -1,17 +1,16 @@
-/*
-feed algorithm:
-
-- send random number of users ( between 5 and 10 )
-- user should not be liked before
-
-*/
-
 const express = require("express");
 const asyncHandler = require("../utils/asyncHandler");
 const protectRoute = require("../middlewares/protectRoute");
 const router = new express.Router();
 const UserModel = require("../models/user.model");
 
+function generateRandom(min = 5, max = 10) {
+    let difference = max - min;
+    let rand = Math.random();
+    rand = Math.floor( rand * difference);
+    rand = rand + min;
+    return rand;
+}
 router.get("/", protectRoute, asyncHandler(async (req, res) => {
     const user = await UserModel.findOne({discord: req.user.id});
 
@@ -27,7 +26,7 @@ router.get("/", protectRoute, asyncHandler(async (req, res) => {
                 $ne: user._id,
             }
         }],
-    }).limit(5);
+    }).limit(generateRandom());
 
     // todo: add commonInterest property to all docs in feed
     return res.status(200).json({status: "ok", data: feed, count: feed.length});
