@@ -68,13 +68,11 @@ router.get("/", asyncHandler(async (req, res) => {
             discord: result.id,
             image,
         });
-        // ondeploy: change to `deployedurl.com/almost_there`
-        return res.redirect("http://localhost:3000/almost_there");
+        return res.redirect(`${process.env.FRONTEND_URL}/almost_there`);
     } else if (user.interests.length === 0 || user.gender === null) {
-        return res.redirect("http://localhost:3000/almost_there");
+        return res.redirect(`${process.env.FRONTEND_URL}/almost_there`);
     } else {
-        // ondeploy: change to `deployedurl.com/feed`
-        return res.redirect("http://localhost:3000/@feed")
+        return res.redirect(`${process.env.FRONTEND_URL}/@feed`);
     }
 }));
 
