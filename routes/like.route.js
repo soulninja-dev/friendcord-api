@@ -9,7 +9,7 @@ router.put("/:id", protectRoute, asyncHandler(async (req, res) => {
     if (likedUser) {
         await UserModel.findOneAndUpdate({discord: req.user.id}, {
             $push: {
-                liked: likedUser._id,
+                liked: likedUser.discord,
             }
         })
 

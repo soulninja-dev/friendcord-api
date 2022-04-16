@@ -13,6 +13,9 @@ const oauthRouter = require("./routes/oauth.route");
 const userRouter = require("./routes/user.route");
 const likeRouter = require("./routes/like.route");
 const dislikeRouter = require("./routes/dislike.route");
+const feedRouter = require("./routes/feed.route");
+
+// middlewares
 const setUserInfo = require("./middlewares/setUserInfo");
 
 // db and server start
@@ -45,6 +48,7 @@ app.use("/api/auth", oauthRouter);
 app.use("/api/user", userRouter);
 app.use("/api/like", likeRouter);
 app.use("/api/dislike", dislikeRouter);
+app.use("/api/feed", feedRouter);
 
 app.use((err, req, res, next) => {
     switch (err.message) {
