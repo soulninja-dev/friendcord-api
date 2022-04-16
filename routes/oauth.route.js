@@ -74,7 +74,7 @@ router.get("/", asyncHandler(async (req, res) => {
         return res.redirect("http://localhost:3000/almost_there");
     } else {
         // ondeploy: change to `deployedurl.com/feed`
-        return res.redirect("http://localhost:3000/feed")
+        return res.redirect("http://localhost:3000/@feed")
     }
 }));
 

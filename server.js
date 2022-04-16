@@ -11,6 +11,8 @@ dotenv.config({ path: ".env" });
 // route handlers
 const oauthRouter = require("./routes/oauth.route");
 const userRouter = require("./routes/user.route");
+const likeRouter = require("./routes/like.route");
+const dislikeRouter = require("./routes/dislike.route");
 const setUserInfo = require("./middlewares/setUserInfo");
 
 // db and server start
@@ -31,6 +33,7 @@ connect(dbURI, {
 // middleware & static files
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
 // access request cookies from req.cookies
 app.use(cookieParser());
 app.use(morgan("dev"));
@@ -40,6 +43,8 @@ app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
 app.use(setUserInfo);
 app.use("/api/auth", oauthRouter);
 app.use("/api/user", userRouter);
+app.use("/api/like", likeRouter);
+app.use("/api/dislike", dislikeRouter);
 
 app.use((err, req, res, next) => {
     switch (err.message) {
