@@ -26,14 +26,12 @@ const UserSchema = new mongoose.Schema({
     ],
     liked: [
         {
-            type: mongoose.Types.ObjectId,
-            ref: "User",
+            type: String,
         }
     ],
     disliked: [
         {
-            type: mongoose.Types.ObjectId,
-            ref: "User",
+            type: String,
         }
     ],
 });

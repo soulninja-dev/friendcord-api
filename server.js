@@ -14,6 +14,7 @@ const userRouter = require("./routes/user.route");
 const likeRouter = require("./routes/like.route");
 const dislikeRouter = require("./routes/dislike.route");
 const feedRouter = require("./routes/feed.route");
+const matchRouter = require("./routes/matches.route")
 
 // middlewares
 const setUserInfo = require("./middlewares/setUserInfo");
@@ -49,6 +50,7 @@ app.use("/api/user", userRouter);
 app.use("/api/like", likeRouter);
 app.use("/api/dislike", dislikeRouter);
 app.use("/api/feed", feedRouter);
+app.use("/api/matches", matchRouter);
 
 app.use((err, req, res, next) => {
     switch (err.message) {

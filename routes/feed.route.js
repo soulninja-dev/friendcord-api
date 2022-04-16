@@ -1,7 +1,7 @@
 const express = require("express");
+const router = new express.Router();
 const asyncHandler = require("../utils/asyncHandler");
 const protectRoute = require("../middlewares/protectRoute");
-const router = new express.Router();
 const UserModel = require("../models/user.model");
 
 function generateRandom(min = 5, max = 10) {
