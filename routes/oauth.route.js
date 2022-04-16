@@ -69,10 +69,12 @@ router.get("/", asyncHandler(async (req, res) => {
             image,
         });
         // ondeploy: change to `deployedurl.com/almost_there`
-        return res.redirect("http://localhost:3000");
+        return res.redirect("http://localhost:3000/almost_there");
+    } else if (user.interests.length === 0 || user.gender === null) {
+        return res.redirect("http://localhost:3000/almost_there");
     } else {
         // ondeploy: change to `deployedurl.com/feed`
-        return res.redirect("http://localhost:3000")
+        return res.redirect("http://localhost:3000/feed")
     }
 }));
 
