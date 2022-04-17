@@ -65,7 +65,9 @@ router.get("/", asyncHandler(async (req, res) => {
     res.cookie(
         "jwt",
         generateJWTToken({access_token: OAuthResult.access_token}),
-        {httpOnly: true, maxAge: expireTime * 1000}
+        {httpOnly: true, maxAge: expireTime * 1000,
+            domain:`${process.env.FRONTEND_URL}`
+        }
     );
 
     // checking if user exists, in db and creating
