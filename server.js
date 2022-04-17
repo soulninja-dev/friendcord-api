@@ -41,7 +41,7 @@ app.use(express.urlencoded({ extended: true }));
 // access request cookies from req.cookies
 app.use(cookieParser());
 app.use(morgan("dev"));
-app.use(cors({ credentials: true, origin: `${process.env.FRONTEND_URL}` }));
+app.use(cors({ credentials: true, origin: `${process.env.FRONTEND_URL}`,  }));
 
 // route handlers for posts and auth
 app.use(setUserInfo);
