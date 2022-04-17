@@ -2,6 +2,8 @@ const fetch = require("node-fetch");
 const getJWTAccessToken = require("../utils/getJWTAccessToken");
 
 const setUserInfo = async (req, res, next) => {
+    console.log("cookies");
+    console.log(req.cookies);
     const userinfoUrl = "https://discord.com/api/users/@me";
 
     // if jwt exists, get accessToken and set user info in req.user
