@@ -63,6 +63,7 @@ router.get("/", asyncHandler(async (req, res) => {
 
     // setting cookie
     const jwtToken = generateJWTToken({access_token: OAuthResult.access_token});
+    /*
     res.cookie(
         "jwt",
         jwtToken,
@@ -73,6 +74,8 @@ router.get("/", asyncHandler(async (req, res) => {
             sameSite: "none",
         }
     );
+
+     */
 
     // checking if user exists, in db and creating
     const user = await UserModel.findOne({discord: result.id});
@@ -87,14 +90,11 @@ router.get("/", asyncHandler(async (req, res) => {
             discord: result.id,
             image,
         });
-        // return res.redirect(`${process.env.FRONTEND_URL}/almost_there`);
-        return res.status(200).json({status: "ok", data: jwtToken})
+        return res.redirect(`${process.env.FRONTEND_URL}/api/almost_there?token=${jwtToken}`);
     } else if (user.interests.length === 0 || user.gender === null) {
-        // return res.redirect(`${process.env.FRONTEND_URL}/almost_there`);
-        return res.status(200).json({status: "ok", data: jwtToken})
+        return res.redirect(`${process.env.FRONTEND_URL}/api/almost_there?token=${jwtToken}`);
     } else {
-        // return res.redirect(`${process.env.FRONTEND_URL}/@feed`);
-        return res.status(200).json({status: "ok", data: jwtToken})
+        return res.redirect(`${process.env.FRONTEND_URL}/@feed`);
     }
 }));
 
