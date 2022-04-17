@@ -2,8 +2,9 @@ const jwt = require("jsonwebtoken");
 
 // get the access_token stored in the cookie in the request
 const getJWTAccessToken = async (req, res) => {
+    console.log(req.headers.jwt);
     let accessToken = "";
-    jwt.verify(req.cookies.jwt, process.env.JWT_SECRET, (err, decodedToken) => {
+    jwt.verify(req.headers.jwt, process.env.JWT_SECRET, (err, decodedToken) => {
         if (err) {
             return res.status(500).json({
                 status: "error",

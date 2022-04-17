@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
-const cookieParser = require("cookie-parser");
+//const cookieParser = require("cookie-parser");
 const {connect} = require("mongoose");
 const dotenv = require("dotenv");
 dotenv.config({ path: ".env" });
@@ -39,7 +39,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // access request cookies from req.cookies
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(morgan("dev"));
 app.use(cors({ credentials: true, origin: `${process.env.FRONTEND_URL}` }));
 
