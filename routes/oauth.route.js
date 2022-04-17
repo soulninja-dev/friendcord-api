@@ -76,4 +76,9 @@ router.get("/", asyncHandler(async (req, res) => {
     }
 }));
 
+router.get("/auth/logout", asyncHandler(async (req, res) => {
+    res.cookie("jwt", "", { maxAge: 1 });
+    res.redirect(`${process.env.FRONTEND_URL}`);
+}));
+
 module.exports = router;
