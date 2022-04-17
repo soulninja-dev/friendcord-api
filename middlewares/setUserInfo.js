@@ -6,6 +6,7 @@ const setUserInfo = async (req, res, next) => {
 
     // if jwt exists, get accessToken and set user info in req.user
     if (!req.cookies.jwt) {
+        console.log("JWT COOKIE NOT THERE")
         req.user = null;
         return next();
     }
@@ -18,6 +19,9 @@ const setUserInfo = async (req, res, next) => {
             console.log(err);
             return res.status(402).json({status: "error", error: err});
         });
+
+    console.log(`result for req.user`);
+    console.log(result);
 
     if (result.username) {
         // set res.user to result so that we can access user data in controllers

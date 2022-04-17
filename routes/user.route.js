@@ -22,6 +22,7 @@ response:
 */
 
 router.get("/me", asyncHandler(async (req, res) => {
+    console.log(req.user);
     if(req.user) {
         const user = await UserModel.findOne({discord: req.user.id});
         user.username = `${req.user.username}#${req.user.discriminator}`

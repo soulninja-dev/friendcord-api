@@ -13,6 +13,7 @@ const getJWTAccessToken = async (req, res) => {
         }
         accessToken = decodedToken.access_token;
     });
+    console.log(`ACCESS TOKEN: ${accessToken}`)
     return accessToken;
 };
 
