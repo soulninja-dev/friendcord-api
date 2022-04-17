@@ -83,10 +83,13 @@ router.get("/", asyncHandler(async (req, res) => {
     // if user is null
     if (!user) {
         const image = `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}`
-        await UserModel.create({
+        const newuser = await UserModel.create({
             discord: result.id,
             image,
         });
+        console.log("creating user");
+        console.log(newuser);
+
         return res.redirect(`${process.env.FRONTEND_URL}/api/almost_there?token=${jwtToken}`);
     } else if (user.interests.length === 0 || user.gender === null) {
         return res.redirect(`${process.env.FRONTEND_URL}/api/almost_there?token=${jwtToken}`);
