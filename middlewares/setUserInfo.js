@@ -5,9 +5,14 @@ const setUserInfo = async (req, res, next) => {
     console.log("called setUserInfo");
     const userinfoUrl = "https://discord.com/api/users/@me";
 
+    console.log(req.headers);
+    const allCookies = req.headers.allcookies || "";
+    const token = allCookies.substring(4);
+    console.log(token);
+
     // if jwt exists, get accessToken and set user info in req.user
-    if (!req.cookies.jwt) {
-        console.log("JWT HEADER NOT THERE")
+    if (!token) {
+        console.log("JWT NOT THERE")
         req.user = null;
         return next();
     }
