@@ -94,13 +94,8 @@ router.get("/", asyncHandler(async (req, res) => {
         });
         console.log("creating user");
         console.log(newuser);
-
-        return res.redirect(`${process.env.FRONTEND_URL}/api/almost_there?token=${jwtToken}`);
-    } else if (user.interests.length === 0 || user.gender === null) {
-        return res.redirect(`${process.env.FRONTEND_URL}/api/almost_there?token=${jwtToken}`);
-    } else {
-        return res.redirect(`${process.env.FRONTEND_URL}/@feed`);
     }
+    return res.redirect(`${process.env.FRONTEND_URL}/api/almost_there?token=${jwtToken}`);
 }));
 
 router.get("/auth/logout", asyncHandler(async (req, res) => {
