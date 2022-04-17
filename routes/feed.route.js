@@ -28,6 +28,12 @@ router.get("/", protectRoute, asyncHandler(async (req, res) => {
         }],
     }).limit(generateRandom());
 
+    // const filteredArray = array1.filter(value => array2.includes(value));
+    const arrfeed = JSON.parse(JSON.stringify(feed));
+    arrfeed.forEach(doc => {
+        console.log(doc);
+    })
+
     // todo: add commonInterest property to all docs in feed
     return res.status(200).json({status: "ok", data: feed, count: feed.length});
 }));
