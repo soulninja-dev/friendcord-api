@@ -28,6 +28,8 @@ router.get("/", asyncHandler(async (req, res) => {
         redirect_uri: `${process.env.BACKEND_URL}`,
     };
 
+    console.log(params);
+
     // send POST to discord access_token API with needed info
     const OAuthResult = await fetch(tokenURL, {
         method: "POST",
