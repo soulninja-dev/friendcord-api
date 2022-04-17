@@ -86,6 +86,11 @@ router.get("/", asyncHandler(async (req, res) => {
         const newuser = await UserModel.create({
             discord: result.id,
             image,
+            discriminator: result.discriminator,
+            banner: result.banner || "",
+            bannerColor: result.banner_color || "",
+            name: result.username,
+            username: `${result.username}#${result.discriminator}`,
         });
         console.log("creating user");
         console.log(newuser);

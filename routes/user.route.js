@@ -38,11 +38,6 @@ router.post("/", asyncHandler(async (req, res) => {
     const updatedUser =  await UserModel.findOneAndUpdate({discord: req.user.id}, {
         gender,
         interests,
-        discriminator: req.user.discriminator,
-        banner: req.user.banner || "",
-        bannerColor: req.user.banner_color || "",
-        name: req.user.username,
-        username: `${req.user.username}#${req.user.discriminator}`,
     });
     return res.status(200).json({ status: "ok", data: updatedUser})
 }));
