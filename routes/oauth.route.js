@@ -27,6 +27,7 @@ router.get("/", asyncHandler(async (req, res) => {
         code: req.query.code,
         redirect_uri: `${req.protocol}://${req.get("host")}/api/auth`,
     };
+
     // send POST to discord access_token API with needed info
     const OAuthResult = await fetch(tokenURL, {
         method: "POST",
@@ -40,6 +41,9 @@ router.get("/", asyncHandler(async (req, res) => {
             console.log(err);
         });
 
+    console.log("OAuthResult");
+    console.log(OAuthResult);
+
     // getting user info
     const userinfoUrl = "https://discord.com/api/users/@me";
 
@@ -52,6 +56,9 @@ router.get("/", asyncHandler(async (req, res) => {
             return res.status(402).json({status: "error", error: err});
         });
 
+    console.log("result");
+    console.log(result);
+
     // setting cookie
     res.cookie(
         "jwt",
@@ -61,6 +68,10 @@ router.get("/", asyncHandler(async (req, res) => {
 
     // checking if user exists, in db and creating
     const user = await UserModel.findOne({discord: result.id});
+
+    console.log("user");
+    console.log(user);
+
     // if user is null
     if (!user) {
         const image = `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}`

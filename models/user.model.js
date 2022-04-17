@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema({
     // discord id
     discord: {
         type: String,
-        required: true,
+        required: [true, "Discord id is necessary"],
         unique: true,
     },
     username: {
