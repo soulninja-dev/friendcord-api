@@ -25,7 +25,7 @@ router.get("/", asyncHandler(async (req, res) => {
         client_secret: process.env.CLIENT_SECRET,
         grant_type: "authorization_code",
         code: req.query.code,
-        redirect_uri: `${req.protocol}://${req.get("host")}/api/auth`,
+        redirect_uri: `${process.env.FRONTEND_URL}`,
     };
 
     // send POST to discord access_token API with needed info
