@@ -25,7 +25,7 @@ router.get("/", asyncHandler(async (req, res) => {
         client_secret: process.env.CLIENT_SECRET,
         grant_type: "authorization_code",
         code: req.query.code,
-        redirect_uri: `${process.env.BACKEND_URL}`,
+        redirect_uri: `${process.env.REDIRECT_URL}`,
     };
 
     console.log(params);
