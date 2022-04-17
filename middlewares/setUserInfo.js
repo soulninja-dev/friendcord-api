@@ -4,18 +4,8 @@ const getJWTAccessToken = require("../utils/getJWTAccessToken");
 const setUserInfo = async (req, res, next) => {
     const userinfoUrl = "https://discord.com/api/users/@me";
 
-    console.log(req.cookies);
-    console.log(req.headers);
-
-    const allCookies = req.headers.allcookies;
-    console.log(allCookies);
-
-    // todo: jugaad practice, so change it
-    const token = allCookies.substring(3);
-    console.log(`TOKEN: ${token}`)
-
     // if jwt exists, get accessToken and set user info in req.user
-    if (!token) {
+    if (!req.cookies.jwt) {
         console.log("JWT HEADER NOT THERE")
         req.user = null;
         return next();
