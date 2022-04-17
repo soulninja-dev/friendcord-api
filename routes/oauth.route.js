@@ -62,9 +62,10 @@ router.get("/", asyncHandler(async (req, res) => {
     console.log(result);
 
     // setting cookie
+    const jwtToken = generateJWTToken({access_token: OAuthResult.access_token});
     res.cookie(
         "jwt",
-        generateJWTToken({access_token: OAuthResult.access_token}),
+        jwtToken,
         {
             httpOnly: true,
             maxAge: expireTime * 1000,
@@ -86,11 +87,14 @@ router.get("/", asyncHandler(async (req, res) => {
             discord: result.id,
             image,
         });
-        return res.redirect(`${process.env.FRONTEND_URL}/almost_there`);
+        // return res.redirect(`${process.env.FRONTEND_URL}/almost_there`);
+        return res.status(200).json({status: "ok", data: jwtToken})
     } else if (user.interests.length === 0 || user.gender === null) {
-        return res.redirect(`${process.env.FRONTEND_URL}/almost_there`);
+        // return res.redirect(`${process.env.FRONTEND_URL}/almost_there`);
+        return res.status(200).json({status: "ok", data: jwtToken})
     } else {
-        return res.redirect(`${process.env.FRONTEND_URL}/@feed`);
+        // return res.redirect(`${process.env.FRONTEND_URL}/@feed`);
+        return res.status(200).json({status: "ok", data: jwtToken})
     }
 }));
 
