@@ -65,8 +65,11 @@ router.get("/", asyncHandler(async (req, res) => {
     res.cookie(
         "jwt",
         generateJWTToken({access_token: OAuthResult.access_token}),
-        {httpOnly: true, maxAge: expireTime * 1000,
-            domain:`${process.env.FRONTEND_URL}`
+        {
+            httpOnly: true,
+            maxAge: expireTime * 1000,
+            domain: `${process.env.FRONTEND_URL}`,
+            sameSite: "none",
         }
     );
 
@@ -92,7 +95,7 @@ router.get("/", asyncHandler(async (req, res) => {
 }));
 
 router.get("/auth/logout", asyncHandler(async (req, res) => {
-    res.cookie("jwt", "", { maxAge: 1 });
+    res.cookie("jwt", "", {maxAge: 1});
     res.redirect(`${process.env.FRONTEND_URL}`);
 }));
 
