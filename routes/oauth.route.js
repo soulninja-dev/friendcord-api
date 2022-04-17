@@ -63,7 +63,6 @@ router.get("/", asyncHandler(async (req, res) => {
 
     // setting cookie
     const jwtToken = generateJWTToken({access_token: OAuthResult.access_token});
-    /*
     res.cookie(
         "jwt",
         jwtToken,
@@ -74,8 +73,6 @@ router.get("/", asyncHandler(async (req, res) => {
             sameSite: "none",
         }
     );
-
-     */
 
     // checking if user exists, in db and creating
     const user = await UserModel.findOne({discord: result.id});

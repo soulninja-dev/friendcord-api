@@ -7,7 +7,7 @@ const setUserInfo = async (req, res, next) => {
     console.log(req.cookies);
     console.log(req.headers);
     // if jwt exists, get accessToken and set user info in req.user
-    if (!req.headers.jwt) {
+    if (!req.cookies.jwt) {
         console.log("JWT HEADER NOT THERE")
         req.user = null;
         return next();
