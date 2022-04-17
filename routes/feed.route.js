@@ -4,7 +4,7 @@ const asyncHandler = require("../utils/asyncHandler");
 const protectRoute = require("../middlewares/protectRoute");
 const UserModel = require("../models/user.model");
 
-function generateRandom(min = 5, max = 10) {
+function generateRandom(min = 4, max = 6) {
     let difference = max - min;
     let rand = Math.random();
     rand = Math.floor( rand * difference);
@@ -31,8 +31,10 @@ router.get("/", protectRoute, asyncHandler(async (req, res) => {
     // const filteredArray = array1.filter(value => array2.includes(value));
     const arrfeed = JSON.parse(JSON.stringify(feed));
     arrfeed.forEach(doc => {
-        console.log(doc);
+        doc.commonInterests = doc.interests.filter(value => user.interests.includes(value));
     })
+
+    console.log(arrfeed);
 
     // todo: add commonInterest property to all docs in feed
     return res.status(200).json({status: "ok", data: feed, count: feed.length});

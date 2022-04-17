@@ -26,6 +26,7 @@ router.get("/me", asyncHandler(async (req, res) => {
     if(req.user) {
         const user = await UserModel.findOne({discord: req.user.id});
         user.username = `${req.user.username}#${req.user.discriminator}`;
+        user.bannerColor = req.user.banner_color;
         res.status(200).json({status: "ok", data: user});
     } else {
         res.status(404).json({status: "error", error: "not logged in"})
