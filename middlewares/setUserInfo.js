@@ -6,12 +6,21 @@ const setUserInfo = async (req, res, next) => {
 
     console.log(req.cookies);
     console.log(req.headers);
+
+    const allCookies = req.headers.allcookies;
+    console.log(allCookies);
+
+    // todo: jugaad practice, so change it
+    const token = allCookies.substring(3);
+    console.log(`TOKEN: ${token}`)
+
     // if jwt exists, get accessToken and set user info in req.user
-    if (!req.cookies.jwt) {
+    if (!token) {
         console.log("JWT HEADER NOT THERE")
         req.user = null;
         return next();
     }
+
     const accessToken = await getJWTAccessToken(req, res);
     const result = await fetch(userinfoUrl, {
         headers: {authorization: "Bearer " + accessToken},
