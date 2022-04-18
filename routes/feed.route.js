@@ -11,6 +11,7 @@ function generateRandom(min = 4, max = 6) {
     rand = rand + min;
     return rand;
 }
+
 router.get("/", protectRoute, asyncHandler(async (req, res) => {
     const user = await UserModel.findOne({discord: req.user.id});
 
@@ -28,16 +29,13 @@ router.get("/", protectRoute, asyncHandler(async (req, res) => {
         }],
     }).limit(generateRandom());
 
-    // const filteredArray = array1.filter(value => array2.includes(value));
     const arrfeed = JSON.parse(JSON.stringify(feed));
     arrfeed.forEach(doc => {
         doc.commonInterests = doc.interests.filter(value => user.interests.includes(value));
     })
 
-    console.log(arrfeed);
-
     // todo: add commonInterest property to all docs in feed
-    return res.status(200).json({status: "ok", data: feed, count: feed.length});
+    return res.status(200).json({status: "ok", data: arrfeed, count: arrfeed.length});
 }));
 
 module.exports = router;
