@@ -4,7 +4,7 @@ const UserModel = require("../models/user.model");
 const asyncHandler = require("../utils/asyncHandler");
 const protectRoute = require("../middlewares/protectRoute");
 
-router.put("/:id", protectRoute, asyncHandler(async (req, res) => {
+router.get("/:id", protectRoute, asyncHandler(async (req, res) => {
     const likedUser = await UserModel.findOne({discord: req.params.id});
     if (likedUser) {
         await UserModel.findOneAndUpdate({discord: req.user.id}, {
